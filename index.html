@@ -402,7 +402,9 @@ function rate(isKnown){
   }
   idx++;
   updateFlashProgress();
-  updateHomeStats();
+  $('hKnown').textContent = words.filter(w=>(w.knownCount||0)>=3).length;
+  $('hUnknown').textContent = words.filter(w=>w.seen>0&&(w.knownCount||0)<(w.unknownCount||0)).length;
+  $('hSeen').textContent = words.filter(w=>(w.seen||0)>0).length;
   showCard();
 }
 
