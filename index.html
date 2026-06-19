@@ -401,10 +401,14 @@ function rate(isKnown){
     save();
   }
   idx++;
+  const seen = words.filter(w=>w.seen>0).length;
+  const known = words.filter(w=>(w.knownCount||0)>=3).length;
+  const unknown = words.filter(w=>w.seen>0&&(w.knownCount||0)<(w.unknownCount||0)).length;
+  $('hTotal').textContent=words.length;
+  $('hKnown').textContent=known;
+  $('hUnknown').textContent=unknown;
+  $('hSeen').textContent=seen;
   updateFlashProgress();
-  $('hKnown').textContent = words.filter(w=>(w.knownCount||0)>=3).length;
-  $('hUnknown').textContent = words.filter(w=>w.seen>0&&(w.knownCount||0)<(w.unknownCount||0)).length;
-  $('hSeen').textContent = words.filter(w=>(w.seen||0)>0).length;
   showCard();
 }
 
