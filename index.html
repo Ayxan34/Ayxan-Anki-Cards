@@ -326,15 +326,15 @@ function renderHome(){
 }
 
 function updateHomeStats(){
-  const seen = words.filter(w => w.seen > 0).length;
-  const known = words.filter(w => w.knownCount >= 3).length;
-  const unknown = words.filter(w => w.seen > 0 && w.knownCount < w.seen * 0.5).length;
-  $('hTotal').textContent = words.length;
-  $('hKnown').textContent = known;
-  $('hUnknown').textContent = unknown;
-  $('hSeen').textContent = seen;
+  const seen = words.filter(w=>w.seen>0).length;
+  const known = words.filter(w=>(w.knownCount||0)>=3).length;
+  const unknown = words.filter(w=>w.seen>0&&(w.knownCount||0)<(w.unknownCount||0)).length;
+  $('hTotal').textContent=words.length;
+  $('hKnown').textContent=known;
+  $('hUnknown').textContent=unknown;
+  $('hSeen').textContent=seen;
 }
-
+ 
 function startFlash(onlyWrong){
   if(onlyWrong && wrongCards.length > 0){
     deck = [...wrongCards].sort(() => Math.random() - 0.5);
