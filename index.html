@@ -397,10 +397,12 @@ function rate(isKnown){
   if(w){
     if(isKnown){ w.knownCount = (w.knownCount||0) + 1; sessionKnown++; }
     else{ w.unknownCount = (w.unknownCount||0) + 1; sessionUnknown++; wrongCards.push(c); }
+    w.seen = (w.seen||0) + 1;
     save();
   }
   idx++;
   updateFlashProgress();
+  updateHomeStats();
   showCard();
 }
 
